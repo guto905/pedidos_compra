@@ -1,54 +1,89 @@
-# CodeIgniter 4 Framework
+# API de Cadastro de Pedidos de Compra
 
-## What is CodeIgniter?
+Esta é uma API REST desenvolvida em PHP utilizando o framework CodeIgniter e um banco de dados relacional MySQL. Ela permite o cadastro, consulta, atualização e exclusão de clientes, produtos e pedidos de compra.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+Requisitos
+PHP 7.0 ou superior
+MySQL
+CodeIgniter 3.x
+Composer (para instalação de dependências)
+Instalação
+Configuração do Banco de Dados:
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+Crie um banco de dados MySQL para a aplicação.
+Configure as credenciais do banco de dados no arquivo app/config/database.php.
+Migrações:
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+Utilize as migrações do CodeIgniter para criar as tabelas necessárias. Execute os comandos no terminal:
+Copy code
+php index.php migrate create_clientes
+php index.php migrate create_produtos
+php index.php migrate create_pedidos
+Modelos e Controladores:
 
-The user guide corresponding to the latest version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
+Crie os modelos e controladores para cada recurso (Clientes, Produtos e Pedidos) e configure as rotas.
+Autenticação JWT:
 
-## Important Change with index.php
+Para a autenticação JWT, é necessário configurar uma chave secreta no arquivo app/config/jwt.php.
+Executando o Servidor Local:
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+Inicie um servidor local usando o PHP:
+Copy code
+php -S localhost:8000
+O servidor estará rodando em http://localhost:8000.
+Uso
+A API aceita e retorna dados no formato JSON. Abaixo estão os endpoints disponíveis:
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+Clientes
+Listar Todos os Clientes
 
-**Please** read the user guide for a better explanation of how CI4 works!
+Método: GET
+Endpoint: /clientes
+Parâmetros de Paginação e Filtro: page, per_page, filter
+Exibir Detalhes de um Cliente
 
-## Repository Management
+Método: GET
+Endpoint: /clientes/{id}
+Criar um Cliente
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+Método: POST
+Endpoint: /clientes
+Corpo da Requisição (JSON):
+json
+Copy code
+{
+  "parametros": {
+    "cpf_cnpj": "12345678900",
+    "nome_razao_social": "Nome Cliente",
+    "endereco": "Endereço do Cliente"
+  }
+}
+Atualizar um Cliente
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+Método: PUT
+Endpoint: /clientes/{id}
+Corpo da Requisição (JSON):
+json
+Copy code
+{
+  "parametros": {
+    "nome_razao_social": "Novo Nome do Cliente",
+    "endereco": "Novo Endereço do Cliente"
+  }
+}
+Excluir um Cliente
 
-## Contributing
-
-We welcome contributions from the community.
-
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
-
-## Server Requirements
-
-PHP version 7.4 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+Método: DELETE
+Endpoint: /clientes/{id}
+Produtos
+(Adapte e descreva aqui os endpoints para os produtos, seguindo o mesmo padrão dos clientes)
+Pedidos
+(Adapte e descreva aqui os endpoints para os pedidos, seguindo o mesmo padrão dos clientes)
+Consulta de Dados de Endereço por CEP
+(Explique como a API consulta dados de endereço por CEP, se aplicável)
+Token JWT
+(Explique como gerar e utilizar o token JWT para autenticação)
+Contribuindo
+(Adicione informações sobre como os colaboradores podem contribuir com o projeto)
+Licença
+Este projeto está sob a licença MIT - veja o arquivo LICENSE para detalhes.
